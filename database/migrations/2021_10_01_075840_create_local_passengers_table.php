@@ -15,7 +15,7 @@ class CreateLocalPassengersTable extends Migration
     {
         Schema::create('local_passengers', function (Blueprint $table) {
             $table->id();
-            $table->string('nic');
+            $table->string('nic')->unique();
             $table->unsignedBigInteger('psngr_id');
             $table->timestamps();
             $table->foreign('psngr_id')->references('id')->on('passengers');
