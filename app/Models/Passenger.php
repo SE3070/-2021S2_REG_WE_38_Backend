@@ -8,9 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Passenger extends Model
 {
     use HasFactory;
-
+    
+    private static $obj;
     protected $table = "passengers";
     protected $guarded = ['*'];
+
+    private final function __construct() {
+    }
+
+    public static function getPassenger() {
+        if (!isset(self::$obj)) {
+            self::$obj = new Passenger();
+        }
+         
+        return self::$obj;
+    }
 
     public function passengerAccounts(){
         return $this->hasOne(PassengerAccount::class);
@@ -23,4 +35,5 @@ class Passenger extends Model
     public function foreignPassengers(){
         return $this->hasMany(ForeignPassengers::class);
     }
+
 }

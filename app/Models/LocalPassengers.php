@@ -9,8 +9,21 @@ class LocalPassengers extends Model
 {
     use HasFactory;
 
+    private static $obj;
     protected $table = "local_passengers";
     protected $guarded = ['*'];
+
+    private final function __construct() {
+
+    }
+
+    public static function getLocalPassenger() {
+        if (!isset(self::$obj)) {
+            self::$obj = new LocalPassengers();
+        }
+         
+        return self::$obj;
+    }
 
     public function passenger(){
         return $this->belongsTo(Passenger::class);

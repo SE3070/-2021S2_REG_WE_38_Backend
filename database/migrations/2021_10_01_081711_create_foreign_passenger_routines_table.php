@@ -15,9 +15,12 @@ class CreateForeignPassengerRoutinesTable extends Migration
     {
         Schema::create('foreign_passenger_routines', function (Blueprint $table) {
             $table->id();
-            $table->string('route');
             $table->datetime('start_time');
             $table->datetime('end_time');
+            $table->string('start_des');
+            $table->string('end_des');
+            $table->float('distance',8,2);
+            $table->float('amount',8,2);
             $table->unsignedBigInteger('psngr_id');
             $table->foreign('psngr_id')->references('id')->on('foreign_passengers');
             $table->timestamps();

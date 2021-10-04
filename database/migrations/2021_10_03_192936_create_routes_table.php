@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLocalPassengersTable extends Migration
+class CreateRoutesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateLocalPassengersTable extends Migration
      */
     public function up()
     {
-        Schema::create('local_passengers', function (Blueprint $table) {
+        Schema::create('routes', function (Blueprint $table) {
             $table->id();
-            $table->string('nic')->unique();
-            $table->unsignedBigInteger('psngr_id');
+            $table->string('r_number');
+            $table->string('r_des');
+            $table->float('distance');
+            $table->float('amount');
             $table->timestamps();
-            $table->foreign('psngr_id')->references('id')->on('passengers');
         });
     }
 
@@ -29,6 +30,6 @@ class CreateLocalPassengersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('local_passengers');
+        Schema::dropIfExists('routes');
     }
 }
