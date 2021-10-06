@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Passenger;
 use App\Models\LocalPassengers;
+use App\Models\LocalPassengerAccount;
+use App\Models\ForeignPassengerAccount;
 use App\Models\ForeignPassengers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -26,7 +28,8 @@ class PassengerController extends Controller
                 "firstname" => "required",
                 "lastname" => "required",
                 "email" => "required",
-                "nic" => "required"
+                "nic" => "required",
+                "tot_amount" => "required"
             ]);
 
             if($validator -> fails()){
@@ -43,6 +46,14 @@ class PassengerController extends Controller
                     $localPassenger->nic = request('nic');
                     $localPassenger->psngr_id = $passenger->id;
                     $localPassenger->save();
+
+                    $localPassngerAccount = LocalPassengerAccount::getLocalPassengerAccount();
+                    $localPassngerAccount->psngr_id = $localPassenger->id;
+                    $localPassngerAccount->tot_amount = request('tot_amount');
+                    $localPassngerAccount->balance = request('tot_amount');
+                    echo(request('tot_amount'));
+                    $localPassngerAccount->save();
+
                 }else {
                     return response()->json(['message' => 'NIC not found', 'error' => $e], 403);
                 }
@@ -70,7 +81,8 @@ class PassengerController extends Controller
                 "firstname" => "required",
                 "lastname" => "required",
                 "email" => "required",
-                "passport" => "required"
+                "passport" => "required",
+                "tot_amount" => "required"
             ]);
     
             if ($validator->fails()){
@@ -87,6 +99,14 @@ class PassengerController extends Controller
                     $foreignPassenger->passport = request('passport');
                     $foreignPassenger->psngr_id = $passenger->id;
                     $foreignPassenger->save();
+
+                    $foreignPassngerAccount = ForeignPassengerAccount::getForeignPassengerAccount();
+                    $foreignPassngerAccount->psngr_id = $foreignPassenger->id;
+                    $foreignPassngerAccount->tot_amount = request('tot_amount');
+                    $foreignPassngerAccount->balance = request('tot_amount');
+                    
+                    echo(request('tot_amount'));
+                    $foreignPassngerAccount->save();
                 }else{
                     return response()->json(['message' => 'Passport not found', 'error' => $e], 403);
                 }
