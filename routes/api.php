@@ -8,6 +8,13 @@ use App\Http\Controllers\LocalPassengerRoutinesController;
 use App\Http\Controllers\ForeignPassengerRoutineController;
 use App\Http\Controllers\RoutesController;
 use App\Http\Controllers\BusController;
+use App\Http\Controllers\TimeTableController;
+use App\Http\Controllers\AlternativeTimeTableController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\OverCrowdedDetailsController;
+use App\Http\Controllers\LocalPassengerAccountController;
+use App\Http\Controllers\ForeignPassengerAccountController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -46,4 +53,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::post('/creat-route', [RoutesController::class, 'createRoute']);
     Route::post('/creat-bus', [BusController::class, 'createBus']);
+    Route::post('/creat-time-table', [TimeTableController::class, 'createTimeTable']);
+    Route::post('/creat-alt-time-table/{id}', [AlternativeTimeTableController::class, 'createAlternativeTimeTable']);
+    Route::post('/create-overcrowd-report', [OverCrowdedDetailsController::class, 'createOverCrowdReport']);
+    Route::post('/create-miss-behave-report', [OverCrowdedDetailsController::class, 'createOverCrowdReport']);
+    Route::post('/reload-local', [LocalPassengerAccountController::class, 'reloadTotalAmount']);
+    Route::post('/reload-foreign', [ForeignPassengerAccountController::class, 'foreignReload']);
 });

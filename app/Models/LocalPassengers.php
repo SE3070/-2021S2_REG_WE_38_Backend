@@ -32,4 +32,8 @@ class LocalPassengers extends Model
     public function localPassengerRoutines(){
         return $this->hasMany(LocalPassengerRoutines::class);
     }
+
+    public function localPassengerAccount(){
+        return $this->hasOne(LocalPassengerAccount::class);
+    }
 }

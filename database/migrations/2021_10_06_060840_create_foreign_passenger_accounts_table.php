@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePassengerAccountsTable extends Migration
+class CreateForeignPassengerAccountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreatePassengerAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('passenger_accounts', function (Blueprint $table) {
+        Schema::create('foreign_passenger_accounts', function (Blueprint $table) {
             $table->id();
-            $table->float('balance', 8, 2);
-            $table->string('time_period');
+            $table->float('balance');
+            $table->float('tot_amount');
             $table->unsignedBigInteger('psngr_id');
             $table->timestamps();
-            $table->foreign('psngr_id')->references('id')->on('passengers');
+            $table->foreign('psngr_id')->references('id')->on('foreign_passengers');
         });
     }
 
@@ -30,6 +30,6 @@ class CreatePassengerAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('passenger_accounts');
+        Schema::dropIfExists('foreign_passenger_accounts');
     }
 }

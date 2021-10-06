@@ -45,7 +45,8 @@ class ForeignPassengerRoutineController extends Controller
                 return response()->json(['local_passenger_routine' => $foreignPsngrRoutine], 201);
             }
         } catch (Exception $e) {
-            return response()->json(['message' => 'Something went wrong', 'error' => $e], 500);
+            return response()->json(['message' => 'Something went wrong']);
+
         }
     }
 }
