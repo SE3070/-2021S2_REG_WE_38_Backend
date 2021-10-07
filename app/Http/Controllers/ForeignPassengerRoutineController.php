@@ -43,7 +43,7 @@ class ForeignPassengerRoutineController extends Controller
                         $foreignPsngrRoutine->save();
     
                         $newBalance = $currentBalance - request('amount');
-                        echo($newBalance);
+                        // echo($newBalance);
 
                         $affected = DB::table('foreign_passenger_accounts')->where('psngr_id', $foreignPassenger->id)->update(['balance' => $newBalance]);
                     }else {
@@ -52,11 +52,12 @@ class ForeignPassengerRoutineController extends Controller
                 }else {
                     return response()->json(['message' => 'Passenger is not found', 'error' => $e], 403);
                 }
-                return response()->json(['local_passenger_routine' => $foreignPsngrRoutine], 201);
+                return $foreignPsngrRoutine;
             }
         } catch (Exception $e) {
             return response()->json(['message' => 'Something went wrong']);
 
         }
     }
+
 }

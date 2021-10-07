@@ -25,9 +25,7 @@ class JourneyRouteController extends Controller
                 $rate->admin_id = Auth::user()->id;
                 $rate->rate = request('rate');
                 $rate->save();
-
                 return $rate;
-
             }
         }catch (Exception $e) {
             return response()->json(['message' => 'Something went wrong']);
