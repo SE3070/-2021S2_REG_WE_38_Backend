@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Passenger;
 use App\Models\LocalPassengerRoutines;
+use App\Models\LocalPassengerAccount;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -35,19 +36,25 @@ class LocalPassengerRoutinesController extends Controller
             } else {
     
                 $localPassenger = DB::table('local_passengers')->where('nic', request('nic') )->first();
-                echo($localPassenger->id);
+                $currentBalance = DB::table('local_passenger_accounts')->where('psngr_id', $localPassenger->id)->value('balance');
     
                 if($localPassenger->id){
-                    $localPsngrRoutine = LocalPassengerRoutines::getLocalPassengerRoutines();
-                    $localPsngrRoutine->start_time = request('start_time');
-                    $localPsngrRoutine->end_time = request('end_time');
-                    $localPsngrRoutine->start_des = request('start_des');
-                    $localPsngrRoutine->end_des = request('end_des');
-                    $localPsngrRoutine->distance = request('distance');
-                    $localPsngrRoutine->amount = request('amount');
-                    $localPsngrRoutine->psngr_id = $localPassenger->id;
-                    $localPsngrRoutine->save();
-                    
+                    if($currentBalance > 0){
+                        $localPsngrRoutine = LocalPassengerRoutines::getLocalPassengerRoutines();
+                        $localPsngrRoutine->start_time = request('start_time');
+                        $localPsngrRoutine->end_time = request('end_time');
+                        $localPsngrRoutine->start_des = request('start_des');
+                        $localPsngrRoutine->end_des = request('end_des');
+                        $localPsngrRoutine->distance = request('distance');
+                        $localPsngrRoutine->amount = request('amount');
+                        $localPsngrRoutine->psngr_id = $localPassenger->id;
+                        $localPsngrRoutine->save();
+
+                        $newBalance = $currentBalance - request('amount');
+                        $affected = DB::table('local_passenger_accounts')->where('psngr_id', $localPassenger->id)->update(['balance' => $newBalance]);
+                    }else {
+                        return response()->json(['message' => 'Your balance is insufficient']);
+                    }
                 }else {
                     return response()->json(['message' => 'Passenger is not found', 'error' => $e], 403);
                 }
