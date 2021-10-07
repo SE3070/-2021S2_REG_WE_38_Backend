@@ -43,7 +43,13 @@ Route::post('/reg-passenger-foreign' , [PassengerController::class,'createForeig
 */
 Route::post('/local-passenger-route' , [LocalPassengerRoutinesController::class,'createLocalPassengerRoutines']);
 Route::post('/foreign-passenger-route' , [ForeignPassengerRoutineController::class,'createForeignPassengerRoutines']);
-
+/*
+|--------------------------------------------------------------------------
+| passenger Routes - Reload
+|--------------------------------------------------------------------------
+*/
+Route::post('/reload-local', [LocalPassengerAccountController::class, 'reloadTotalAmount']);
+Route::post('/reload-foreign', [ForeignPassengerAccountController::class, 'foreignReload']);
 /*
 |--------------------------------------------------------------------------
 | Admin Protected Routes
@@ -57,6 +63,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/creat-alt-time-table/{id}', [AlternativeTimeTableController::class, 'createAlternativeTimeTable']);
     Route::post('/create-overcrowd-report', [OverCrowdedDetailsController::class, 'createOverCrowdReport']);
     Route::post('/create-miss-behave-report', [OverCrowdedDetailsController::class, 'createOverCrowdReport']);
-    Route::post('/reload-local', [LocalPassengerAccountController::class, 'reloadTotalAmount']);
-    Route::post('/reload-foreign', [ForeignPassengerAccountController::class, 'foreignReload']);
+
 });
