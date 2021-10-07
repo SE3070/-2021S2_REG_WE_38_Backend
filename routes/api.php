@@ -14,6 +14,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OverCrowdedDetailsController;
 use App\Http\Controllers\LocalPassengerAccountController;
 use App\Http\Controllers\ForeignPassengerAccountController;
+use App\Http\Controllers\JourneyRouteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,5 +64,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/creat-alt-time-table/{id}', [AlternativeTimeTableController::class, 'createAlternativeTimeTable']);
     Route::post('/create-overcrowd-report', [OverCrowdedDetailsController::class, 'createOverCrowdReport']);
     Route::post('/create-miss-behave-report', [OverCrowdedDetailsController::class, 'createOverCrowdReport']);
-
+    Route::post('/create-rate', [JourneyRouteController::class, 'createJourneyRate']);
 });
