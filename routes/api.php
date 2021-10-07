@@ -16,6 +16,7 @@ use App\Http\Controllers\LocalPassengerAccountController;
 use App\Http\Controllers\ForeignPassengerAccountController;
 use App\Http\Controllers\JourneyRouteController;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,7 +37,13 @@ Route::post('/login' , [AuthController::class, 'login']);
 */
 Route::post('/reg-passenger-local' , [PassengerController::class,'createLocalPassenger']);
 Route::post('/reg-passenger-foreign' , [PassengerController::class,'createForeignPassenger']);
-
+/*
+|--------------------------------------------------------------------------
+| passenger Routes - History
+|--------------------------------------------------------------------------
+*/
+Route::get('/local-history',[LocalPassengerRoutinesController::class,'getLocalRouteHistory']);
+Route::get('/foreign-history',[ForeignPassengerAccountController::class,'getForeignRouteHistory']);
 /*
 |--------------------------------------------------------------------------
 | passenger Routes - Routines

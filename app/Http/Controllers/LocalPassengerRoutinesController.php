@@ -63,5 +63,24 @@ class LocalPassengerRoutinesController extends Controller
         } catch (Exception $e) {
             return response()->json(['message' => 'Something went wrong', 'error' => $e], 500);
         }   
-    }   
+    }
+    
+    public function getLocalRouteHistory(Request $request){
+        try{
+            $validator = validator::make($request->all(), [
+                'nic' => 'required'
+            ]);
+            if($validator->fails()){
+                return response()->json(['message' => 'Foreign passenger routings validation fails']);
+            }else {
+                
+                $localPassengerId = DB::table('local_passengers')->where('nic', request('nic'))->value('id');
+                $routines = DB::table('local_passenger_routines')->where('psngr_id',$localPassengerId)->get();
+                return response()->json($routines);
+                
+            }
+        } catch(Exception $e){
+            return response()->json(['message' => 'Something went wrong', 'error' => $e], 500);
+        }
+    }
 }
