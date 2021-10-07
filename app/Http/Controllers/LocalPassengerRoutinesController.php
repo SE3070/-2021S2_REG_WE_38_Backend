@@ -58,7 +58,7 @@ class LocalPassengerRoutinesController extends Controller
                 }else {
                     return response()->json(['message' => 'Passenger is not found', 'error' => $e], 403);
                 }
-                return response()->json(['local_passenger_routine' => $localPsngrRoutine], 201);
+                return $localPsngrRoutine;
             }
         } catch (Exception $e) {
             return response()->json(['message' => 'Something went wrong', 'error' => $e], 500);

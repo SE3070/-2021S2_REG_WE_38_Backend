@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use \stdClass;
 use Illuminate\Http\Request;
 use App\Models\Passenger;
 use App\Models\LocalPassengers;
@@ -57,8 +58,18 @@ class PassengerController extends Controller
                 }else {
                     return response()->json(['message' => 'NIC not found', 'error' => $e], 403);
                 }
-                return response()->json(['passenger' => $passenger, 'local_passenger' => $localPassenger], 201);
-            }
+
+                $resObj = new stdClass();
+                $resObj->firstname = $passenger->firstname;
+                $resObj->lastname = $passenger->lastname;
+                $resObj->email = $passenger->email;
+                $resObj->passenger_id = $passenger->id;
+                $resObj->nic = $localPassenger->nic;
+                $resObj->psngr_id = $localPassenger->psngr_id;
+                $resObj->local_passenger_id  = $localPassenger->id;
+
+                return $resObj;
+        }
         } catch (Exception $e) {
             return response()->json(['message' => 'Something went wrong', 'error' => $e], 500);
         }        
@@ -105,14 +116,23 @@ class PassengerController extends Controller
                     $foreignPassngerAccount->tot_amount = request('tot_amount');
                     $foreignPassngerAccount->balance = request('tot_amount');
                     
-                    echo(request('tot_amount'));
                     $foreignPassngerAccount->save();
                 }else{
                     return response()->json(['message' => 'Passport not found', 'error' => $e], 403);
                 }
             }
-            return response()->json(['passenger' => $passenger, 'foreign_passenger' => $foreignPassenger], 201);
+            
+            $resObj = new stdClass();
+            $resObj->firstname = $passenger->firstname;
+            $resObj->lastname = $passenger->lastname;
+            $resObj->email = $passenger->email;
+            $resObj->passenger_id = $passenger->id;
+            $resObj->nic = $foreignPassenger->passport;
+            $resObj->psngr_id = $foreignPassenger->psngr_id;
+            $resObj->local_passenger_id  = $foreignPassenger->id;
 
+            return $resObj;
+            
         } catch (Exception $e) {
             return response()->json(['message' => 'Something went wrong', 'error' => $e], 500);
         }
