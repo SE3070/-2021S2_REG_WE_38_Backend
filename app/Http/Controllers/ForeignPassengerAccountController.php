@@ -28,4 +28,23 @@ class ForeignPassengerAccountController extends Controller
             return response()->json(['message' => 'Something went wrong']);
         }
     }
+
+    public function getForeignRouteHistory(Request $request){
+        try{
+            $validator = validator::make($request->all(), [
+                'passport' => 'required'
+            ]);
+            if($validator->fails()){
+                return response()->json(['message' => 'History validation fails']);
+            }else {
+                
+                $foreignPassengerId = DB::table('foreign_passengers')->where('passport', request('passport'))->value('id');
+                $routines = DB::table('foreign_passenger_routines')->where('psngr_id',$foreignPassengerId)->get();
+                return response()->json($routines);
+                
+            }
+        } catch(Exception $e){
+            return response()->json(['message' => 'Something went wrong', 'error' => $e], 500);
+        }
+    }
 }
