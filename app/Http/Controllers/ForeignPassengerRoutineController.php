@@ -43,7 +43,6 @@ class ForeignPassengerRoutineController extends Controller
                         $foreignPsngrRoutine->save();
     
                         $newBalance = $currentBalance - request('amount');
-                        // echo($newBalance);
 
                         $affected = DB::table('foreign_passenger_accounts')->where('psngr_id', $foreignPassenger->id)->update(['balance' => $newBalance]);
                     }else {

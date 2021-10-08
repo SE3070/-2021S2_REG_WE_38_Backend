@@ -37,6 +37,12 @@ Route::post('/login' , [AuthController::class, 'login']);
 Route::get('/get-time-tables' , [TimeTableController::class, 'getTimeTables']);
 /*
 |--------------------------------------------------------------------------
+| Get Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/get-routes', [RoutesController::class, 'getRoute']);
+/*
+|--------------------------------------------------------------------------
 | passenger Routes - Register
 |--------------------------------------------------------------------------
 */
