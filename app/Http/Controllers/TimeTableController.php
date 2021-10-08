@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use \stdClass;
 use Illuminate\Http\Request;
 use App\Models\TimeTable;
 use App\Models\Bus;
@@ -32,13 +33,28 @@ class TimeTableController extends Controller
                     $timetable->bus_id = $bus->id;
                     $timetable->save();
                 } else {
-                    return response()->json(['message' => 'Something went wrong', 'error' => $e], 403);
+                    return response()->json(['message' => 'Something went wrong']);
                 }
                 
                 return $timetable;
             }
         } catch (Exception $e) {
              return response()->json(['message' => 'Something went wrong', 'error' => $e], 500);
+        }
+    }
+
+    public function getTimeTables(Request $request){
+        try{
+            $timetable = DB::table('time_tables')
+            ->join('buses', 'time_tables.bus_id', '=', 'buses.id')
+            ->join('routes', 'time_tables.route_id', '=', 'routes.id')
+            ->select('time_tables.*', 'buses.bus_number', 'routes.r_number')
+            ->get();
+
+            return $timetable;
+            
+        }catch(Exception $e){
+
         }
     }
 }

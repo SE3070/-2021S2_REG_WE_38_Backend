@@ -29,7 +29,12 @@ use App\Http\Controllers\JourneyRouteController;
 */
 Route::post('/register' , [AuthController::class, 'register']);
 Route::post('/login' , [AuthController::class, 'login']);
-
+/*
+|--------------------------------------------------------------------------
+| Get Time table
+|--------------------------------------------------------------------------
+*/
+Route::get('/get-time-tables' , [TimeTableController::class, 'getTimeTables']);
 /*
 |--------------------------------------------------------------------------
 | passenger Routes - Register
