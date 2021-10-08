@@ -11,6 +11,12 @@ use Illuminate\Validation\ValidationException;
 
 class OverCrowdedDetailsController extends Controller
 {
+    /**
+     * This function is using to create over crowd report
+     * 
+     * @param request
+     * @return json
+     */
     public function createOverCrowdReport(Request $request) {
         try {
             $validator = validator::make($request->all(), [

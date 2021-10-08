@@ -65,6 +65,12 @@ class LocalPassengerRoutinesController extends Controller
         }   
     }
     
+    /**
+     * This funtion is using to get local passenger's history
+     * 
+     * @param request
+     * @return json
+     */
     public function getLocalRouteHistory(Request $request){
         try{
             $validator = validator::make($request->all(), [

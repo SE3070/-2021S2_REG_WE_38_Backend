@@ -11,6 +11,12 @@ use Illuminate\Validation\ValidationException;
 
 class ForeignPassengerAccountController extends Controller
 {
+    /**
+     * This function is using to reload foreign account
+     * 
+     * @param request
+     * @return affected
+     */
     public function foreignReload(Request $request){
         try {
             $validator = validator::make($request->all(), [
@@ -29,6 +35,12 @@ class ForeignPassengerAccountController extends Controller
         }
     }
 
+    /**
+     * This function is using to retrieve foreign passenger's routine history
+     * 
+     * @param request
+     * @return json
+     */
     public function getForeignRouteHistory(Request $request){
         try{
             $validator = validator::make($request->all(), [

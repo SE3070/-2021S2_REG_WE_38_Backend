@@ -9,6 +9,12 @@ use Illuminate\Validation\ValidationException;
 
 class BusController extends Controller
 {
+    /**
+     * This function is using to create buses for the system
+     * 
+     * @param request
+     * @return json
+     */
     public function createBus(Request $request) {
 
         try{
