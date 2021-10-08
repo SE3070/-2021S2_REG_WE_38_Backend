@@ -15,7 +15,7 @@ use App\Http\Controllers\OverCrowdedDetailsController;
 use App\Http\Controllers\LocalPassengerAccountController;
 use App\Http\Controllers\ForeignPassengerAccountController;
 use App\Http\Controllers\JourneyRouteController;
-
+use App\Http\Controllers\ForeignPassengerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,4 +99,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/create-rate', [JourneyRouteController::class, 'createJourneyRate']);
     Route::post('/create-employee', [EmployeeController::class, 'createEmployee']);
     Route::get('/get-buses', [BusController::class, 'getbuses']);
+    Route::get('/get-foriegn-history', [ForeignPassengerController::class, 'getForeignPassengerHistory']);
+    Route::get('/get-local-history', [ForeignPassengerController::class, 'getLocalPassengerHistory']);
+
 });

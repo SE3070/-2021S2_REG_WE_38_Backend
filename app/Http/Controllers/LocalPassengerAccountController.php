@@ -27,7 +27,7 @@ class LocalPassengerAccountController extends Controller
             }else {
                 if(request('nic')){
                     $localPassenger = DB::table('local_passengers')->where('nic',  request('nic'))->first();
-                    echo($localPassenger->id);
+                    // echo($localPassenger->id);
                     $affected = DB::table('local_passenger_accounts')->where('psngr_id', $localPassenger->id)->update(['tot_amount' => request('tot_amount'), 'balance' => request('tot_amount')]);
 
                     return $affected;
