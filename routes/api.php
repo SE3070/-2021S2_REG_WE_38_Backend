@@ -60,8 +60,8 @@ Route::post('/login-passenger-foreign' , [PassengerController::class,'foreignPas
 | passenger Routes - History
 |--------------------------------------------------------------------------
 */
-Route::get('/local-history',[LocalPassengerRoutinesController::class,'getLocalRouteHistory']);
-Route::get('/foreign-history',[ForeignPassengerAccountController::class,'getForeignRouteHistory']);
+Route::post('/local-history',[LocalPassengerRoutinesController::class,'getLocalRouteHistory']);
+Route::post('/foreign-history',[ForeignPassengerAccountController::class,'getForeignRouteHistory']);
 /*
 |--------------------------------------------------------------------------
 | passenger Routes - Routines
@@ -81,8 +81,8 @@ Route::post('/reload-foreign', [ForeignPassengerAccountController::class, 'forei
 | passenger Routes - Get Balance
 |--------------------------------------------------------------------------
 */
-Route::get('get-balance-local', [PassengerController::class, 'getBalanceLocal']);
-Route::get('get-balance-foreign', [PassengerController::class, 'getBalanceForeign']);
+Route::post('get-balance-local', [PassengerController::class, 'getBalanceLocal']);
+Route::post('get-balance-foreign', [PassengerController::class, 'getBalanceForeign']);
 /*
 |--------------------------------------------------------------------------
 | Admin Protected Routes
