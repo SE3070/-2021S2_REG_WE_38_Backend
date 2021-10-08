@@ -182,4 +182,39 @@ class PassengerController extends Controller
             return response()->json(['message' => 'Something went wrong']);
         }
     }
+
+    public function getBalanceLocal(Request $request) {
+        try{
+            $validator = validator::make($request->all(), [
+                'nic' => 'required'
+            ]);
+            if($validator->fails()){
+                return response()->json(['message' => 'Get balance validation fails']);
+            } else {
+                $id = DB::table('local_passengers')->where('nic', request('nic'))->value('id');
+                $balance = DB::table('local_passenger_accounts')->where('psngr_id', $id)->value('balance');
+                return response()->json(['balance' => $balance]);
+            }
+        } catch(Exception $e){
+            return response()->json(['message' => 'Something went wrong']);
+        }
+    }
+
+    public function getBalanceForeign(Request $request){
+        try{
+            $validator = validator::make($request->all(), [
+                'passport' => 'required'
+            ]);
+            if($validator->fails()){
+                return response()->json(['message' => 'Get balance validation fails']);
+            } else {
+                $id = DB::table('foreign_passengers')->where('passport', request('passport'))->value('id');
+                $balance = DB::table('foreign_passenger_accounts')->where('psngr_id', $id)->value('balance');
+                return response()->json(['balance' => $balance]);
+            }
+        } catch(Exception $e){
+            return response()->json(['message' => 'Something went wrong']);
+        }
+
+    }
 }

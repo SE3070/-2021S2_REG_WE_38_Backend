@@ -67,6 +67,13 @@ Route::post('/reload-local', [LocalPassengerAccountController::class, 'reloadTot
 Route::post('/reload-foreign', [ForeignPassengerAccountController::class, 'foreignReload']);
 /*
 |--------------------------------------------------------------------------
+| passenger Routes - Reload
+|--------------------------------------------------------------------------
+*/
+Route::get('get-balance-local', [PassengerController::class, 'getBalanceLocal']);
+Route::get('get-balance-foreign', [PassengerController::class, 'getBalanceForeign']);
+/*
+|--------------------------------------------------------------------------
 | Admin Protected Routes
 |--------------------------------------------------------------------------
 */
