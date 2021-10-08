@@ -78,7 +78,7 @@ Route::post('/reload-local', [LocalPassengerAccountController::class, 'reloadTot
 Route::post('/reload-foreign', [ForeignPassengerAccountController::class, 'foreignReload']);
 /*
 |--------------------------------------------------------------------------
-| passenger Routes - Reload
+| passenger Routes - Get Balance
 |--------------------------------------------------------------------------
 */
 Route::get('get-balance-local', [PassengerController::class, 'getBalanceLocal']);
@@ -97,4 +97,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/create-overcrowd-report', [OverCrowdedDetailsController::class, 'createOverCrowdReport']);
     Route::post('/create-miss-behave-report', [OverCrowdedDetailsController::class, 'createOverCrowdReport']);
     Route::post('/create-rate', [JourneyRouteController::class, 'createJourneyRate']);
+    Route::post('/create-employee', [EmployeeController::class, 'createEmployee']);
 });

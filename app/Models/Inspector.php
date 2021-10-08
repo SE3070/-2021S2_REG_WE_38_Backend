@@ -9,6 +9,9 @@ class Inspector extends Model
 {
     use HasFactory;
 
+    protected $table = 'inspectors';
+    protected $guarded = ['*'];
+
     public function __construct(){
         
     }
