@@ -12,6 +12,12 @@ use Illuminate\Validation\ValidationException;
 
 class ForeignPassengerRoutineController extends Controller
 {
+    /**
+     * This function is using to create foreign passenger journey
+     * 
+     * @param request
+     * @return json
+     */
     public function createForeignPassengerRoutines(Request $request) {
         try {
             $validator = validator::make($request->all(), [

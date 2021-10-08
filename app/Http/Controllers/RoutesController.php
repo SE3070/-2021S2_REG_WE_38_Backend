@@ -10,7 +10,12 @@ use Illuminate\Validation\ValidationException;
 
 class RoutesController extends Controller
 {
-
+    /**
+     * This function is using to create route by admin
+     * 
+     * @param request
+     * @return json
+     */
     public function createRoute(Request $request){
         try {
             $validator = validator::make($request->all(), [
@@ -36,6 +41,11 @@ class RoutesController extends Controller
         }
     }
 
+    /**
+     * This function is using to get routes
+     * 
+     * @return json
+     */
     public function getRoute() {
         try{
             $route = DB::table('routes')->get();

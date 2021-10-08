@@ -10,8 +10,13 @@ use App\Models\PassengerMissBehave;
 
 class PassengerMissBehaveController extends Controller
 {
+    /**
+     * This function is using to create miss behave report
+     * 
+     * @param request
+     * @return json
+     */
     public function createMissBehaveReport(Request $request){
-
         try {
             $validator =  validator::make($request->all(), [
                 "route" => "required",

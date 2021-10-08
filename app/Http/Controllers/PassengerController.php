@@ -139,6 +139,12 @@ class PassengerController extends Controller
         }
     }
 
+    /**
+     * This function is using login for local passenger
+     * 
+     * @param request
+     * @return 1 or 0
+     */
     public function localPassengerLogin(Request $request){
         try{
             $validator = validator::make($request->all(), [
@@ -161,6 +167,12 @@ class PassengerController extends Controller
         }
     }
 
+    /**
+     * This function is using to login for foreign passenger
+     * 
+     * @param request
+     * @return 1 or 0
+     */
     public function foreignPassengerLogin(Request $request){
         try{
             $validator = validator::make($request->all(), [
@@ -183,6 +195,12 @@ class PassengerController extends Controller
         }
     }
 
+    /**
+     * This function is using to get local passenger
+     * 
+     * @param request
+     * @return json
+     */
     public function getBalanceLocal(Request $request) {
         try{
             $validator = validator::make($request->all(), [
@@ -200,6 +218,12 @@ class PassengerController extends Controller
         }
     }
 
+    /**
+     * This function is using to get foreign passenger
+     * 
+     * @param request
+     * @return json
+     */
     public function getBalanceForeign(Request $request){
         try{
             $validator = validator::make($request->all(), [

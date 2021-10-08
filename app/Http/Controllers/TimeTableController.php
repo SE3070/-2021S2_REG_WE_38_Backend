@@ -13,6 +13,12 @@ use Illuminate\Validation\ValidationException;
 
 class TimeTableController extends Controller
 {
+    /**
+     * This function is using to create time table
+     * 
+     * @param request
+     * @return json
+     */
     public function createTimeTable(Request $request){
         try {
             $validator = validator::make($request->all(), [
@@ -42,7 +48,11 @@ class TimeTableController extends Controller
              return response()->json(['message' => 'Something went wrong', 'error' => $e], 500);
         }
     }
-
+    /**
+     * This function is using to get all the time tables
+     * 
+     * @return json
+     */
     public function getTimeTables(Request $request){
         try{
             $timetable = DB::table('time_tables')
@@ -54,7 +64,7 @@ class TimeTableController extends Controller
             return $timetable;
             
         }catch(Exception $e){
-
+            return response()->json(['message' => 'Something went wrong', 'error' => $e], 500);
         }
     }
 }

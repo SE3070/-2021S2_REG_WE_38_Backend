@@ -10,6 +10,12 @@ use Illuminate\Validation\ValidationException;
 
 class LocalPassengerAccountController extends Controller
 {
+    /**
+     * This function is using to reload the amount
+     * 
+     * @param request
+     * @return json
+     */
     public function reloadTotalAmount(Request $request) {
         try {
             $validator = validator::make($request->all(), [

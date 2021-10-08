@@ -9,6 +9,16 @@ use App\Http\Controllers\EmployeeFactory;
 
 class EmployeeController extends Controller
 {
+    /**
+     * This functuion is using to create employees
+     * In here createEmployee function is using Factory pattern to create objects for inspectors and drivers
+     * 
+     * @param request
+     * @return json
+     * 
+     * @see EmployeeFactory::setInspectors()
+     * @see EmployeeFactory::setDrivers()
+     */
 
     public function createEmployee(Request $request){
 

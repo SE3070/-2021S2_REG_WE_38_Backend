@@ -11,7 +11,15 @@ use Illuminate\Validation\ValidationException;
 
 class JourneyRouteController extends Controller
 {
+    /**
+     * This function is using to create journey rate 
+     * 
+     * @param request
+     * @return json
+     * 
+     */
     public function createJourneyRate(Request $request) {
+        
         try {
             $validator = validator::make($request->all(), [
                 'rate'=>'required'
