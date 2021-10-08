@@ -39,6 +39,13 @@ Route::post('/reg-passenger-local' , [PassengerController::class,'createLocalPas
 Route::post('/reg-passenger-foreign' , [PassengerController::class,'createForeignPassenger']);
 /*
 |--------------------------------------------------------------------------
+| passenger Routes - login
+|--------------------------------------------------------------------------
+*/
+Route::post('/login-passenger-local' , [PassengerController::class,'localPassengerLogin']);
+Route::post('/login-passenger-foreign' , [PassengerController::class,'foreignPassengerLogin']);
+/*
+|--------------------------------------------------------------------------
 | passenger Routes - History
 |--------------------------------------------------------------------------
 */

@@ -10,6 +10,7 @@ use App\Models\LocalPassengerAccount;
 use App\Models\ForeignPassengerAccount;
 use App\Models\ForeignPassengers;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class PassengerController extends Controller
@@ -138,4 +139,47 @@ class PassengerController extends Controller
         }
     }
 
+    public function localPassengerLogin(Request $request){
+        try{
+            $validator = validator::make($request->all(), [
+                'nic' => 'required'
+            ]);
+    
+            if($validator -> fails()){
+                return response()->json(['message' => 'Local Passenger login validation failed']);
+            } else {
+                $id = DB::table('local_passengers')->where('nic', request('nic'))->value('id');
+    
+                if($id){
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        } catch(Exception $e){
+            return response()->json(['message' => 'Something went wrong']);
+        }
+    }
+
+    public function foreignPassengerLogin(Request $request){
+        try{
+            $validator = validator::make($request->all(), [
+                'passport' => 'required'
+            ]);
+    
+            if($validator -> fails()){
+                return response()->json(['message' => 'Foreign Passenger login validation failed']);
+            } else {
+                $id = DB::table('foreign_passengers')->where('passport', request('passport'))->value('id');
+    
+                if($id){
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        } catch(Exception $e){
+            return response()->json(['message' => 'Something went wrong']);
+        }
+    }
 }
