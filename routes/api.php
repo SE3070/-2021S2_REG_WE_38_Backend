@@ -98,4 +98,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/create-miss-behave-report', [OverCrowdedDetailsController::class, 'createOverCrowdReport']);
     Route::post('/create-rate', [JourneyRouteController::class, 'createJourneyRate']);
     Route::post('/create-employee', [EmployeeController::class, 'createEmployee']);
+    Route::get('/get-buses', [BusController::class, 'getbuses']);
 });
