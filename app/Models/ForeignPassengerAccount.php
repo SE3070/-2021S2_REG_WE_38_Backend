@@ -5,27 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PassengerAccount extends Model
+class ForeignPassengerAccount extends Model
 {
     use HasFactory;
 
     private static $obj;
-    protected $table = "passenger_accounts";
+    protected $table = 'foreign_passenger_accounts';
     protected $guarded = ['*'];
 
     private final function __construct() {
 
     }
 
-    public static function getPassengerAccount() {
+    public static function getForeignPassengerAccount() {
         if (!isset(self::$obj)) {
-            self::$obj = new PassengerAccount();
+            self::$obj = new ForeignPassengerAccount();
         }
          
         return self::$obj;
     }
 
-    public function passenger(){
-        return $this->belongsTo(Passenger::class);
+    public function foreignPassenger(){
+        return $this->belongsTo(ForeignPassenger::class);
     }
 }

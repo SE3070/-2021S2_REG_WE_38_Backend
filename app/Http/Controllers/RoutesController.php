@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Route;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class RoutesController extends Controller
 {
-
+    /**
+     * This function is using to create route by admin
+     * 
+     * @param request
+     * @return json
+     */
     public function createRoute(Request $request){
         try {
             $validator = validator::make($request->all(), [
@@ -32,6 +38,24 @@ class RoutesController extends Controller
             }
         } catch (Exception $e) {
             return response()->json(['message' => 'Something went wrong', 'error' => $e], 500);
+        }
+    }
+
+    /**
+     * This function is using to get routes
+     * 
+     * @return json
+     */
+    public function getRoute() {
+        try{
+            $route = DB::table('routes')->get();
+            if(empty($route)){
+                return response()->json(['message' => 'Route not found']);
+            }else {
+                return $route;
+            }
+        }catch(Exception $e){
+            return response()->json(['message' => 'Something went wrong']);
         }
     }
 

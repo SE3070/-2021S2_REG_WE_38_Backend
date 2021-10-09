@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Bus;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class BusController extends Controller
 {
+    /**
+     * This function is using to create buses for the system
+     * 
+     * @param request
+     * @return json
+     */
     public function createBus(Request $request) {
 
         try{
@@ -28,6 +35,17 @@ class BusController extends Controller
             return $bus;
 
         } catch (Exception $e){
+            return response()->json(['message' => 'Something went wrong', 'error' => $e], 500);
+        }
+    }
+
+    public function getbuses(){
+        try {
+           $buses = DB::table('buses')->get();
+
+           return $buses;
+
+        } catch (Exception $e) {
             return response()->json(['message' => 'Something went wrong', 'error' => $e], 500);
         }
     }

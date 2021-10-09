@@ -5,26 +5,32 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Route extends Model
+class AlternativeTimeTable extends Model
 {
     use HasFactory;
 
     private static $obj;
-    protected $table = "routes";
+    protected $table = "alternative_time_tables";
     protected $guarded = ['*'];
 
     private final function __construct() {
 
     }
 
-    public static function getRoute() {
-        if (!isset(self::$obj)) {
-            self::$obj = new Route();
+    public static function getAlternativeTimeTable() {
+        if(!isset(self::$obj)) {
+            self::$obj = new AlternativeTimeTable();
         }
+
         return self::$obj;
     }
 
-    public function passenger(){
+    public function timetable(){
         return $this->belongsTo(TimeTable::class);
     }
+
+    public function bus(){
+        return $this->hasOne(Bus::class);
+    }
+
 }
