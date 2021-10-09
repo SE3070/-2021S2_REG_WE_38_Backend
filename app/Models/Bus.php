@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+// Bus class with Singleton pattern implemented
 class Bus extends Model
 {
     use HasFactory;
