@@ -12,19 +12,25 @@ use Illuminate\Validation\ValidationException;
 class AlternativeTimeTableController extends Controller
 {
     public function createAlternativeTimeTable(Request $request, $id){
+        /**
+         * This function is use to create alternative time table
+         * 
+         * @param request
+         * @param id
+         * @return json
+         */
         try {
            $validator = validator::make($request->all(), [
                 "b_number" => "required",
            ]);
 
            if($validator->fails()){
-                return response()->json(['message' => 'Alternative time table validation fails']);    
+                return response()->json(['message' => 'Alternative time table validation fails'], 403);    
            }else {
                 $bus = DB::table('buses')->where('bus_number', request('b_number'))->first();
                 $timetable = DB::table('time_tables')->where('bus_id', $bus->id)->first();
                 $altTimeTable = DB::table('alternative_time_tables')->where('bus_id', $bus->id)->first();
-                echo('what the fuck');
-
+              
                 if(!empty($timetable) && !empty($altTimeTable)){
                     if($timetable->bus_id == $bus->id && $altTimeTable->bus_id == $bus->id){
                         return response()->json(['message' => 'Bus is already taken by both'], 403);

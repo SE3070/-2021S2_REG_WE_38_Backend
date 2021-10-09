@@ -25,7 +25,7 @@ class OverCrowdedDetailsController extends Controller
             ]);
 
             if($validator->fails()){
-                return response()->json(['message' => 'Over crowd report validation fails']);
+                return response()->json(['message' => 'Over crowd report validation fails'], 400);
  
             }else {
                 $overCrowd = new OverCrowdedDetails();
@@ -36,7 +36,7 @@ class OverCrowdedDetailsController extends Controller
 
             return $overCrowd;
         } catch (Exception $e) {
-            return response()->json(['message' => 'Something went wrong']);
+            return response()->json(['message' => 'Something went wrong'], 500);
         }
     }
 }

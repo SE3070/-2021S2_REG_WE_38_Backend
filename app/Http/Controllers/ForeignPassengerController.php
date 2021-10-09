@@ -12,7 +12,7 @@ class ForeignPassengerController extends Controller
             $foreignHistory = DB::table('foreign_passenger_routines')->get();
             return $foreignHistory;
         }catch(Exception $e){
-            return response()->json(['message' => 'Something went wrong']);
+            return response()->json(['message' => 'Something went wrong'], 500);
         }
     }
 
@@ -21,7 +21,7 @@ class ForeignPassengerController extends Controller
             $localHistory = DB::table('local_passenger_routines')->get();
             return $localHistory;
         }catch(Exception $e){
-            return response()->json(['message' => 'Something went wrong']);
+            return response()->json(['message' => 'Something went wrong'], 500);
         }
     }
 }

@@ -35,7 +35,7 @@ class PassengerController extends Controller
             ]);
 
             if($validator -> fails()){
-                return response()->json(['message' => 'local passenger validation fails']);
+                return response()->json(['message' => 'local passenger validation fails'], 400);
             }else {
                 $passenger = Passenger::getPassenger();
                 $passenger->firstname = request('firstname');

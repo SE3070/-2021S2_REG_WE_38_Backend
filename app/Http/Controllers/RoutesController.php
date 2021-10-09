@@ -50,12 +50,12 @@ class RoutesController extends Controller
         try{
             $route = DB::table('routes')->get();
             if(empty($route)){
-                return response()->json(['message' => 'Route not found']);
+                return response()->json(['message' => 'Route not found'], 403);
             }else {
                 return $route;
             }
         }catch(Exception $e){
-            return response()->json(['message' => 'Something went wrong']);
+            return response()->json(['message' => 'Something went wrong'], 500);
         }
     }
 

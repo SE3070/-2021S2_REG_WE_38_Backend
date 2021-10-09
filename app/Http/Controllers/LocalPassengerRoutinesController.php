@@ -53,7 +53,7 @@ class LocalPassengerRoutinesController extends Controller
                         $newBalance = $currentBalance - request('amount');
                         $affected = DB::table('local_passenger_accounts')->where('psngr_id', $localPassenger->id)->update(['balance' => $newBalance]);
                     }else {
-                        return response()->json(['message' => 'Your balance is insufficient']);
+                        return response()->json(['message' => 'Your balance is insufficient'], 403);
                     }
                 }else {
                     return response()->json(['message' => 'Passenger is not found', 'error' => $e], 403);

@@ -47,7 +47,7 @@ class ForeignPassengerAccountController extends Controller
                 'passport' => 'required'
             ]);
             if($validator->fails()){
-                return response()->json(['message' => 'History validation fails']);
+                return response()->json(['message' => 'History validation fails'], 400);
             }else {
                 
                 $foreignPassengerId = DB::table('foreign_passengers')->where('passport', request('passport'))->value('id');

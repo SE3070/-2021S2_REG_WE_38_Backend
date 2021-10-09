@@ -25,7 +25,7 @@ class PassengerMissBehaveController extends Controller
             ]);
     
             if($validator->fails()){
-                return response()->json(['message' => 'Foreign passenger routings validation fails']);
+                return response()->json(['message' => 'Foreign passenger routings validation fails'], 400);
             } else {
                 $missBehave = new PassengerMissBehave();
                 $missBehave->route = request('route');
@@ -37,7 +37,7 @@ class PassengerMissBehaveController extends Controller
             return $missBehave;
 
         } catch (Exception $e) {
-            return response()->json(['message' => 'Something went wrong']);
+            return response()->json(['message' => 'Something went wrong'], 500);
         }
 
     }

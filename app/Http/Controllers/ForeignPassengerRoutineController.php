@@ -30,7 +30,7 @@ class ForeignPassengerRoutineController extends Controller
             ]);
     
             if($validator->fails()){
-                return response()->json(['message' => 'Foreign passenger routings validation fails']);
+                return response()->json(['message' => 'Foreign passenger routings validation fails'], 400);
             } else {
     
                 $foreignPassenger = DB::table('foreign_passengers')->where('passport', request('passport') )->first();
@@ -52,7 +52,7 @@ class ForeignPassengerRoutineController extends Controller
 
                         $affected = DB::table('foreign_passenger_accounts')->where('psngr_id', $foreignPassenger->id)->update(['balance' => $newBalance]);
                     }else {
-                        return response()->json(['message' => 'Your balance is insufficient']);
+                        return response()->json(['message' => 'Your balance is insufficient'], 403);
                     }
                 }else {
                     return response()->json(['message' => 'Passenger is not found', 'error' => $e], 403);

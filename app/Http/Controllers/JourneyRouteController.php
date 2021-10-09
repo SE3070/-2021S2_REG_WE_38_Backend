@@ -26,7 +26,7 @@ class JourneyRouteController extends Controller
             ]);
 
             if($validator->fails()){
-                return response()->json(['message' => 'Your balance is insufficient']);
+                return response()->json(['message' => 'Your balance is insufficient'], 403);
             }else {
 
                 $rate = new JournyRate();
@@ -36,7 +36,7 @@ class JourneyRouteController extends Controller
                 return $rate;
             }
         }catch (Exception $e) {
-            return response()->json(['message' => 'Something went wrong']);
+            return response()->json(['message' => 'Something went wrong'], 500);
         }
     }
 }

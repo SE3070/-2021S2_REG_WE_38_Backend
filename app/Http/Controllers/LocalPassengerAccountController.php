@@ -34,7 +34,7 @@ class LocalPassengerAccountController extends Controller
                 }
             }
         } catch (Exception $e) {
-            return response()->json(['message' => 'Something went wrong']);
+            return response()->json(['message' => 'Something went wrong'], 500);
         }
     }
 }
